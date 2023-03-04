@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaucetButton } from "~~/components/scaffold-eth";
 import RainbowKitCustomConnectButton from "~~/components/scaffold-eth/RainbowKitCustomConnectButton";
-import { Bars3Icon, ArrowPathIcon, BanknotesIcon, UserIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, ArrowPathIcon, BanknotesIcon, UserIcon, ClipboardDocumentIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 
@@ -54,8 +54,14 @@ export default function Header() {
       </li>
       <li>
         <NavLink href="/kyc">
-          <UserIcon className="h-4 w-4" />
+          <ClipboardDocumentIcon className="h-4 w-4" />
           KYC
+        </NavLink>
+      </li>
+      <li>
+        <NavLink href="/admin">
+          <UserIcon className="h-4 w-4" />
+          Admin
         </NavLink>
       </li>
     </>
