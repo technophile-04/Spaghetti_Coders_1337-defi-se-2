@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1063665200098",
+    "project_id": "coc-blockchain-2b580",
+    "storage_bucket": "coc-blockchain-2b580.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063665200098:android:47dc67d0695c84072aa7bb",
+        "android_client_info": {
+          "package_name": "com.example.coc_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1063665200098-bimvchitqcr438e3836afm6huddjos0l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.coc_app",
+            "certificate_hash": "2bf99cb2fea39695e4d52729a0472aaec0c4d532"
+          }
+        },
+        {
+          "client_id": "1063665200098-t70h8c09nru0eer7r5sejgpm744p46e1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQhuwxXDDXC7lqR6SvxFaZzjsp8iJnFHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1063665200098-phkhs0r9qu6i2c176uvchmgpjkg3q3ou.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
