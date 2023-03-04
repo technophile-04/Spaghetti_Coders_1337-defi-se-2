@@ -299,7 +299,7 @@ const Swap = ({ contractName = "Exchange" }) => {
                 </div>
                 {daiBalance ? (
                   <div className="text-gray-500 font-medium flex flex-col items-start">
-                    {ethers.utils.formatEther(daiBalance).slice(0, -14)}
+                    {ethers.utils.formatEther(daiBalance)}
                   </div>
                 ) : (
                   <div className="text-gray-500 font-medium flex flex-col items-start">Loading...</div>
@@ -311,7 +311,7 @@ const Swap = ({ contractName = "Exchange" }) => {
                 </div>
                 {lpTokenBalance ? (
                   <div className="text-gray-500 font-medium flex flex-col items-start">
-                    {ethers.utils.formatEther(lpTokenBalance).slice(0, -14)}
+                    {ethers.utils.formatEther(lpTokenBalance)}
                   </div>
                 ) : (
                   <div className="text-gray-500 font-medium flex flex-col items-start">Loading...</div>
