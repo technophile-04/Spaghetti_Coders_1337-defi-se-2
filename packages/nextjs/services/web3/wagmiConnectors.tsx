@@ -7,7 +7,10 @@ import {
   braveWallet,
   ledgerWallet,
 } from "@rainbow-me/rainbowkit/wallets";
+import { Valora, CeloWallet, CeloDance } from "@celo/rainbowkit-celo/wallets";
+import { Alfajores } from "@celo/rainbowkit-celo/chains";
 import { configureChains } from "wagmi";
+import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import * as chains from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
@@ -16,7 +19,7 @@ import { getTargetNetwork } from "~~/utils/scaffold-eth";
 
 const configuredChain = getTargetNetwork();
 // We always want to have mainnet enabled (ENS resolution, ETH price, etc). But only once.
-const enabledChains = configuredChain.id === 1 ? [configuredChain] : [configuredChain, chains.mainnet];
+const enabledChains = configuredChain.id === 1 ? [configuredChain, Alfajores] : [configuredChain, chains.mainnet];
 
 /**
  * Chains for the app
@@ -31,6 +34,7 @@ export const appChains = configureChains(
       apiKey: "oKxs-03sij-U_N0iOlrSsZFr29-IqbuF",
       priority: 0,
     }),
+    jsonRpcProvider({ rpc: chain => ({ http: chain.rpcUrls.default.http[0] }) }),
     publicProvider({ priority: 1 }),
   ],
   {
@@ -69,6 +73,9 @@ export const wagmiConnectors = connectorsForWallets([
   {
     groupName: "Supported Wallets",
     wallets: [
+      Valora({ chains: appChains.chains }),
+      CeloWallet({ chains: appChains.chains }),
+      CeloDance({ chains: appChains.chains }),
       metaMaskWallet({ chains: appChains.chains, shimDisconnect: true }),
       walletConnectWallet({ chains: appChains.chains }),
       ledgerWallet({ chains: appChains.chains }),

@@ -134,6 +134,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@celo/rainbowkit-celo@npm:^0.11.0":
+  version: 0.11.0
+  resolution: "@celo/rainbowkit-celo@npm:0.11.0"
+  dependencies:
+    "@wagmi/chains": ">=0.2.1"
+  peerDependencies:
+    "@rainbow-me/rainbowkit": ">=0.11.0"
+    ethers: ">=5.5.1"
+    wagmi: 0.11.x
+  checksum: 777c56bfdd7215dbdd52a46ec757be31b9410a35e0cb59a424bb3426525bd671c582502eab250f0d3fd98a93988370d79b5fb84fcb6abb75436b8172fc0e78f1
+  languageName: node
+  linkType: hard
+
 "@coinbase/wallet-sdk@npm:^3.5.4":
   version: 3.6.3
   resolution: "@coinbase/wallet-sdk@npm:3.6.3"
@@ -1638,6 +1651,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@se-2/nextjs@workspace:packages/nextjs"
   dependencies:
+    "@celo/rainbowkit-celo": ^0.11.0
     "@ethersproject/networks": ^5.7.1
     "@ethersproject/web": ^5.7.1
     "@heroicons/react": ^2.0.11
@@ -2937,6 +2951,18 @@ __metadata:
     typescript:
       optional: true
   checksum: f68b16fa0620fe4162ad3412735a5c239f59c9a7b15e900a217ff7403d74c8a262fdcd77ab0b37cbc747e78c2c197272d9340d9ef091525d5e335e91905d3def
+  languageName: node
+  linkType: hard
+
+"@wagmi/chains@npm:>=0.2.1":
+  version: 0.2.10
+  resolution: "@wagmi/chains@npm:0.2.10"
+  peerDependencies:
+    typescript: ">=4.9.4"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: a7792f59b4af673d8e6ee4bd87177e7ef6ab9868625fecd97153211523d367ed8c8341fa89fc80864079e447bb51e265cd2b3428651fe3d90a8c0a51da67b8b7
   languageName: node
   linkType: hard
 

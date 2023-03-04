@@ -1,4 +1,6 @@
 import * as chains from "wagmi/chains";
+
+import * as celoChain from "@celo/rainbowkit-celo/chains";
 import { Network } from "@ethersproject/networks";
 
 export type TChainAttributes = {
@@ -81,13 +83,23 @@ export function getBlockExplorerTxLink(network: Network, txnHash: string) {
  * Get the wagmi's Chain target network configured in the app.
  */
 export const getTargetNetwork = () => {
-  const network = process.env.NEXT_PUBLIC_NETWORK as keyof typeof chains;
-
-  if (!network || !chains[network]) {
+  const network = process.env.NEXT_PUBLIC_NETWORK as keyof typeof celoChain;
+  let configureNetwork: any;
+  // @ts-expect-error ignoring it since we need to check
+  if (!network || (!chains[network] && !celoChain[network])) {
     // If error defaults to hardhat local network
     console.error("Network name is not set, misspelled or unsupported network used in .env.*");
     return chains.hardhat;
   }
 
-  return chains[network];
+  if (celoChain[network]) {
+    configureNetwork = celoChain[network];
+
+    // @ts-expect-error ignoring it since we need to check
+  } else if (chains[network]) {
+    // @ts-expect-error ignoring it since we need to check
+    configureNetwork = chains[network];
+  }
+
+  return configureNetwork;
 };

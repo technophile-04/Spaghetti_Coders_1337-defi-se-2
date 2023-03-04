@@ -36,7 +36,7 @@ export default function RainbowKitCustomConnectButton() {
                 );
               }
 
-              if (chain.unsupported || chain.id !== configuredChain.id) {
+              if (chain.id !== configuredChain.id) {
                 return (
                   <>
                     <span className="text-xs" style={{ color: networkColor }}>
