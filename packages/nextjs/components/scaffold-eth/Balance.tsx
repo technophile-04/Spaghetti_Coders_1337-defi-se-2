@@ -3,12 +3,13 @@ import { useAccountBalance } from "~~/hooks/scaffold-eth/useAccountBalance";
 type TBalanceProps = {
   address?: string;
   className?: string;
+  classNamesText?: string;
 };
 
 /**
  * Display (ETH & USD) balance of an ETH address.
  */
-export default function Balance({ address, className = "" }: TBalanceProps) {
+export default function Balance({ address, className = "", classNamesText = "" }: TBalanceProps) {
   const { balance, price, isError, isLoading, onToggleBalance, isEthBalance } = useAccountBalance(address);
 
   if (!address || isLoading || balance === null) {
@@ -38,13 +39,13 @@ export default function Balance({ address, className = "" }: TBalanceProps) {
       <div className="w-full flex items-center justify-center">
         {isEthBalance ? (
           <>
-            <span>{balance?.toFixed(4)}</span>
-            <span className="text-xs font-bold ml-1">ETH</span>
+            <span className={`${classNamesText}`}>{balance?.toFixed(4)}</span>
+            <span className={`text-xs font-bold ml-1 ${classNamesText}`}>ETH</span>
           </>
         ) : (
           <>
-            <span className="text-xs font-bold mr-1">$</span>
-            <span>{(balance * price).toFixed(2)}</span>
+            <span className={`${classNamesText} text-xs font-bold mr-1`}>$</span>
+            <span className={`${classNamesText}`}>{(balance * price).toFixed(2)}</span>
           </>
         )}
       </div>
