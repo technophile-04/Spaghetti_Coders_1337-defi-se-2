@@ -1,5 +1,3 @@
-import { ArrowsRightLeftIcon } from "@heroicons/react/20/solid";
-import { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 
@@ -8,23 +6,23 @@ const Swap = () => {
   const [tokenName2, setTokenName2] = useState("DAI");
   const [tokenValue1, setTokenValue1] = useState("");
   const [tokenValue2, setTokenValue2] = useState("");
+  const handleFirstSelect = e => {
+    if (e.target.value === "ETH") {
+      setTokenName1("ETH");
+      setTokenName2("DAI");
+    } else {
+      setTokenName1("DAI");
+      setTokenName2("ETH");
+    }
+  };
 
   const handleSecondSelect = e => {
     if (e.target.value === "ETH") {
       setTokenName1("DAI");
       setTokenName2("ETH");
-    } else if (e.target.value === "DAI") {
+    } else {
       setTokenName1("ETH");
       setTokenName2("DAI");
-    }
-  };
-  const handleFirstSelect = e => {
-    if (e.target.value === "ETH") {
-      setTokenName2("DAI");
-      setTokenName1("ETH");
-    } else if (e.target.value === "DAI") {
-      setTokenName2("ETH");
-      setTokenName1("DAI");
     }
   };
 
@@ -56,9 +54,9 @@ const Swap = () => {
                   // value={displayValue}
                   // onChange={onChangeNumber}
                 />
-                <select onChange={handleFirstSelect} className="select bg-primary h-fit select-info">
-                  <option value={tokenName1}>{tokenName1}</option>
-                  <option value={tokenName2}>{tokenName2}</option>
+                <select onChange={handleFirstSelect} value={tokenName1} className="select bg-primary h-fit select-info">
+                  <option value="ETH">ETH</option>
+                  <option value="DAI">DAI</option>
                 </select>
               </div>
             </div>
@@ -77,9 +75,13 @@ const Swap = () => {
                   // value={displayValue}
                   // onChange={onChangeNumber}
                 />
-                <select onChange={handleSecondSelect} className="select bg-primary h-fit select-info">
-                  <option value={tokenName2}>{tokenName2}</option>
-                  <option value={tokenName1}>{tokenName1}</option>
+                <select
+                  onChange={handleSecondSelect}
+                  value={tokenName2}
+                  className="select bg-primary h-fit select-info"
+                >
+                  <option value="ETH">ETH</option>
+                  <option value="DAI">DAI</option>
                 </select>
               </div>
             </div>
