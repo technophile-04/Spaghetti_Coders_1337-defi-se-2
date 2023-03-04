@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+ import React, { useEffect } from "react";
 
 /**
  * Check if a click was made outside the passed ref
