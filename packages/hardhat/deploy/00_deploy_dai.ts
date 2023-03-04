@@ -9,7 +9,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   await deploy("DAI", {
     from: deployer,
     // Contract constructor arguments
-    args: [ethers.utils.parseEther("10000")],
+    args: [ethers.utils.parseEther("10000"), "0xEA42AA9AD123d9C94CA76aa5E025aDdBadA26C13"],
     log: true,
     autoMine: true,
   });
