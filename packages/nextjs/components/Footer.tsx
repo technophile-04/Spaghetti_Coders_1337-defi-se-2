@@ -1,7 +1,6 @@
 import React from "react";
 import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
 import { useAppStore } from "~~/services/store/store";
-import { HeartIcon } from "@heroicons/react/24/outline";
 import SwitchTheme from "./SwitchTheme";
 import { Faucet } from "~~/components/scaffold-eth";
 import { getTargetNetwork } from "~~/utils/scaffold-eth";
@@ -29,45 +28,6 @@ export default function Footer() {
           </div>
           <SwitchTheme className="pointer-events-auto" />
         </div>
-      </div>
-      <div className="w-full">
-        <ul className="menu menu-horizontal w-full">
-          <div className="flex justify-center items-center gap-2 text-sm w-full">
-            <div>
-              <a
-                href="https://github.com/scaffold-eth/se-2"
-                target="_blank"
-                rel="noreferrer"
-                className="underline underline-offset-2"
-              >
-                Fork me
-              </a>
-            </div>
-            <span>·</span>
-            <div>
-              Built with <HeartIcon className="inline-block h-4 w-4" /> at 🏰{" "}
-              <a
-                href="https://buidlguidl.com/"
-                target="_blank"
-                rel="noreferrer"
-                className="underline underline-offset-2"
-              >
-                BuidlGuidl
-              </a>
-            </div>
-            <span>·</span>
-            <div>
-              <a
-                href="https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA"
-                target="_blank"
-                rel="noreferrer"
-                className="underline underline-offset-2"
-              >
-                Support
-              </a>
-            </div>
-          </div>
-        </ul>
       </div>
     </div>
   );

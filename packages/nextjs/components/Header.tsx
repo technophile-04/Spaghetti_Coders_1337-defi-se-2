@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaucetButton } from "~~/components/scaffold-eth";
 import RainbowKitCustomConnectButton from "~~/components/scaffold-eth/RainbowKitCustomConnectButton";
-import { Bars3Icon, BugAntIcon, SparklesIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, ArrowPathIcon, BanknotesIcon, UserIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 
@@ -41,15 +41,21 @@ export default function Header() {
         <NavLink href="/">Home</NavLink>
       </li>
       <li>
-        <NavLink href="/debug">
-          <BugAntIcon className="h-4 w-4" />
-          Debug Contracts
+        <NavLink href="/swap">
+          <ArrowPathIcon className="h-4 w-4" />
+          Swap
         </NavLink>
       </li>
       <li>
-        <NavLink href="/example-ui">
-          <SparklesIcon className="h-4 w-4" />
-          Example UI
+        <NavLink href="/lend-borrow">
+          <BanknotesIcon className="h-4 w-4" />
+          Lend / Borrow
+        </NavLink>
+      </li>
+      <li>
+        <NavLink href="/kyc">
+          <UserIcon className="h-4 w-4" />
+          KYC
         </NavLink>
       </li>
     </>
@@ -84,8 +90,8 @@ export default function Header() {
             <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" />
           </Link>
           <div className="flex flex-col">
-            <span className="font-bold leading-tight">Scaffold-eth</span>
-            <span className="text-xs">Ethereum dev stack</span>
+            <span className="font-bold leading-tight">DeFi Lego ❤️</span>
+            <span className="text-xs">All in one DeFi Lego</span>
           </div>
         </div>
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">{navLinks}</ul>
