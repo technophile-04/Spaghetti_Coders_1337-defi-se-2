@@ -58,10 +58,10 @@ const Admin: NextPage = () => {
           </h1>
 
           <div className="overflow-x-auto md:w-full ">
-            <table className="table w-fit">
+            <table className="table border w-fit">
               {/* head */}
               <thead>
-                <tr>
+                <tr className="border">
                   <th>Image</th>
                   <th>Name</th>
                   <th>Aadhar Number</th>
@@ -73,7 +73,7 @@ const Admin: NextPage = () => {
               <tbody>
                 {/* row 1 */}
                 {data.map(d => (
-                  <tr>
+                  <tr className="border border-b-[1.5px]">
                     <td>
                       <label htmlFor="my-modal-6" className="flex items-center space-x-3">
                         <div className="mask cursor-pointer mask-squircle w-12 h-12">
