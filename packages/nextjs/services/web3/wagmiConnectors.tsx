@@ -19,7 +19,7 @@ import { getTargetNetwork } from "~~/utils/scaffold-eth";
 
 const configuredChain = getTargetNetwork();
 // We always want to have mainnet enabled (ENS resolution, ETH price, etc). But only once.
-const enabledChains = configuredChain.id === 1 ? [configuredChain, Alfajores] : [configuredChain, chains.mainnet];
+const enabledChains = configuredChain.id === 1 ? [configuredChain] : [configuredChain, chains.mainnet, Alfajores];
 
 /**
  * Chains for the app
