@@ -6,7 +6,7 @@ const ContextProvider = ({ children }) => {
   const [user, setUser] = useState("");
 
   useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const userInfo = JSON.parse(localStorage.getItem("user"));
     setUser(userInfo);
   }, []);
 

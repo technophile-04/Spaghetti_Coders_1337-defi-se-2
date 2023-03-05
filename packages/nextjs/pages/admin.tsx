@@ -11,6 +11,7 @@ const Admin: NextPage = () => {
   const { user } = useContext(Context);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [selectedImg, setSelectedImg] = useState("");
   // const data = [
   //   {
   //     id: "1",
@@ -59,6 +60,7 @@ const Admin: NextPage = () => {
   useEffect(() => {
     const getUsers = async () => {
       try {
+        setLoading(true);
         if (user?.isAdmin !== true) {
           router.push("/");
         }
@@ -71,6 +73,7 @@ const Admin: NextPage = () => {
         const filteredUsers = filteredData.filter(user => user?.kycCompleted === false);
         console.log("filteredUsers ", filteredUsers);
         setUsers([...filteredUsers]);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -80,6 +83,7 @@ const Admin: NextPage = () => {
   // console.log("users ", users);
 
   const acceptHandler = async id => {
+    setLoading(true);
     const userDoc = doc(db, "users", id);
     await updateDoc(userDoc, {
       kycCompleted: true,
@@ -90,11 +94,12 @@ const Admin: NextPage = () => {
         return user.id !== id;
       });
     });
-    console.log("KYC completed");
     toast.success("KYC completed");
+    setLoading(false);
   };
 
   const rejectHandler = async id => {
+    setLoading(true);
     const userDoc = doc(db, "users", id);
     await deleteDoc(userDoc);
 
@@ -103,9 +108,8 @@ const Admin: NextPage = () => {
         return user?.id !== id;
       });
     });
-    console.log("KYC reject");
     toast.success("KYC reject");
-    console.log("users after rejection ", users);
+    setLoading(false);
   };
   return (
     <>
@@ -121,7 +125,7 @@ const Admin: NextPage = () => {
           </h1>
 
           <div className="overflow-x-auto md:w-full ">
-            {loading ? (
+            {!loading ? (
               <table className="table border w-fit">
                 {/* head */}
                 <thead>
@@ -129,7 +133,7 @@ const Admin: NextPage = () => {
                     <th>Image</th>
                     <th>Name</th>
                     <th>Aadhar Number</th>
-                    <th>Address</th>
+                    <th className="text-center">Address</th>
                     <th className="text-center">Action</th>
                   </tr>
                 </thead>
@@ -139,7 +143,11 @@ const Admin: NextPage = () => {
                   {users?.map(d => (
                     <tr key={d?.id} className="border border-b-[1.5px]">
                       <td>
-                        <label htmlFor="my-modal-6" className="flex items-center space-x-3">
+                        <label
+                          htmlFor="my-modal-6"
+                          onClick={() => setSelectedImg(d?.aadharPath)}
+                          className="flex items-center space-x-3"
+                        >
                           <div className="mask cursor-pointer mask-squircle ">
                             <img className="w-12 h-12" src={d?.aadharPath} alt="profile" />
                           </div>
@@ -179,7 +187,7 @@ const Admin: NextPage = () => {
                                 X
                               </label>
                             </div>
-                            <img className="w-full" src={d?.aadharPath} alt="Profile" />
+                            <img className="w-full" src={selectedImg} alt="Profile" />
                           </div>
                         </div>
                       </td>

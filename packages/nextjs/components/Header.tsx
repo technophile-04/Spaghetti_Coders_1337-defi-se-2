@@ -60,6 +60,7 @@ export default function Header() {
     getAuth();
   }, [address]);
 
+  console.log("user ", user);
 
   const navLinks = (
     <>
@@ -78,7 +79,7 @@ export default function Header() {
           Lend / Borrow
         </NavLink>
       </li>
-      {!user?.kycCompleted && (
+      {!user && (
         <li>
           <NavLink href="/kyc">
             <ClipboardDocumentIcon className="h-4 w-4" />

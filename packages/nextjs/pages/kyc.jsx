@@ -8,7 +8,7 @@ import { db } from "../Config/Firebase";
 import { useAccount } from "wagmi";
 import toast from "react-hot-toast";
 import { CheckIcon } from "@heroicons/react/24/solid";
-import { Context } from "~~/Context/ContextProvider";
+import { Context } from "../Context/ContextProvider";
 import { useRouter } from "next/router";
 
 const Kyc = () => {
@@ -17,12 +17,12 @@ const Kyc = () => {
   const [images, setImages] = useState("");
   const [loading, setLoading] = useState(false);
   const { address } = useAccount();
-  const { user } = useContext(Context);
+  const { user, setUser } = useContext(Context);
   const router = useRouter();
   // upload image to ipfs //
   useEffect(() => {
-    console.log("user?.kycCompleted ", user);
-    if (user?.kycCompleted === true) {
+    console.log("user ", user);
+    if (user) {
       router.push("/");
     }
   }, []);
@@ -70,6 +70,7 @@ const Kyc = () => {
       toast.success("Kyc uploaded successfully");
       setAadharNumber("");
       setName("");
+      router.push("/");
     } catch (error) {
       console.log(error);
     }
