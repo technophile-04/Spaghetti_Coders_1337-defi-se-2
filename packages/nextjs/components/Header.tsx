@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaucetButton } from "~~/components/scaffold-eth";
@@ -6,7 +6,10 @@ import RainbowKitCustomConnectButton from "~~/components/scaffold-eth/RainbowKit
 import { Bars3Icon, ArrowPathIcon, BanknotesIcon, UserIcon, ClipboardDocumentIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
-
+import { useAccount } from "wagmi";
+import { db } from "../Config/Firebase";
+import { getDocs, collection, addDoc, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { Context } from "~~/Context/ContextProvider";
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
   const router = useRouter();
   const isActive = router.pathname === href;
@@ -29,11 +32,34 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
  */
 export default function Header() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { setUser, user } = useContext(Context);
   const burgerMenuRef = useRef<HTMLDivElement>(null);
   useOutsideClick(
     burgerMenuRef,
     useCallback(() => setIsDrawerOpen(false), []),
   );
+  const { address } = useAccount();
+
+  useEffect(() => {
+    const getAuth = async () => {
+      try {
+        const userDoc = collection(db, "users");
+        const users = await getDocs(userDoc);
+        const filteredData = users.docs.map(doc => {
+          return { ...doc.data(), id: doc.id };
+        });
+        // console.log("filtered Data", filteredData);
+        const filteredUser = filteredData.filter(user => user?.address === address);
+        if (filteredUser) {
+          setUser(filteredUser[0]);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAuth();
+  }, [address]);
+
 
   const navLinks = (
     <>
@@ -52,18 +78,22 @@ export default function Header() {
           Lend / Borrow
         </NavLink>
       </li>
-      <li>
-        <NavLink href="/kyc">
-          <ClipboardDocumentIcon className="h-4 w-4" />
-          KYC
-        </NavLink>
-      </li>
-      <li>
-        <NavLink href="/admin">
-          <UserIcon className="h-4 w-4" />
-          Admin
-        </NavLink>
-      </li>
+      {!user?.kycCompleted && (
+        <li>
+          <NavLink href="/kyc">
+            <ClipboardDocumentIcon className="h-4 w-4" />
+            KYC
+          </NavLink>
+        </li>
+      )}
+      {user && user?.isAdmin && (
+        <li>
+          <NavLink href="/admin">
+            <UserIcon className="h-4 w-4" />
+            Admin
+          </NavLink>
+        </li>
+      )}
     </>
   );
 
