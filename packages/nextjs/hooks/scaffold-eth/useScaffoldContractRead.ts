@@ -3,6 +3,7 @@ import type { Abi } from "abitype";
 import { useDeployedContractInfo } from "./useDeployedContractInfo";
 import { getTargetNetwork } from "~~/utils/scaffold-eth";
 import { BigNumber } from "ethers";
+import { TRetrivedData } from "~~/pages/lend-borrow";
 
 /**
  * @dev wrapper for wagmi's useContractRead hook which loads in deployed contract contract abi, address automatically
@@ -11,7 +12,7 @@ import { BigNumber } from "ethers";
  * @param args - args to be passed to the function call
  * @param readConfig - extra wagmi configuration
  */
-export const useScaffoldContractRead = <TReturn extends BigNumber | string | boolean = any>(
+export const useScaffoldContractRead = <TReturn extends BigNumber | string | boolean | TRetrivedData = any>(
   contractName: string,
   functionName: string,
   args?: any[],
