@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 contract Exchange is ERC20 {
   address public tokenAddress;
 
-  constructor(address _token) ERC20("DEFI LEGO", "DEGO") {
+  constructor(address _token) ERC20("DEFI LEGO", "DAI") {
     require(_token != address(0), "invalid token address");
 
     tokenAddress = _token;

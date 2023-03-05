@@ -26,6 +26,7 @@ const Swap = ({ contractName = "Exchange" }) => {
   // ----------------------------------------------------
   const [tokenValue3, setTokenValue3] = useState("0");
   const [tokenValue4, setTokenValue4] = useState("0");
+  const [tokenValue5, setTokenValue5] = useState("0");
 
   // -------------------BS---------------------------------
   const configuredChain = getTargetNetwork();
@@ -58,12 +59,18 @@ const Swap = ({ contractName = "Exchange" }) => {
   const { address } = useAccount();
 
   // -----------WAGMI----------
-  const { writeAsync: swapWrite } = useScaffoldContractWrite(
+  const { writeAsync: swapEthWrite } = useScaffoldContractWrite(
     "Exchange",
     "ethToTokenSwap",
     [NUMBER_REGEX.test(tokenValue2) ? ethers.utils.parseEther(tokenValue2) : undefined],
     NUMBER_REGEX.test(tokenValue1) ? tokenValue1 : undefined,
   );
+
+  const { writeAsync: swapTokenWrite } = useScaffoldContractWrite("Exchange", "tokenToEthSwap", [
+    NUMBER_REGEX.test(tokenValue1) ? ethers.utils.parseEther(tokenValue1) : undefined,
+    NUMBER_REGEX.test(tokenValue2) ? ethers.utils.parseEther(tokenValue2) : undefined,
+  ]);
+
   const { writeAsync: addLiquidityWrite } = useScaffoldContractWrite(
     "Exchange",
     "addLiquidity",
@@ -71,9 +78,17 @@ const Swap = ({ contractName = "Exchange" }) => {
     NUMBER_REGEX.test(tokenValue3) ? tokenValue3 : undefined,
   );
 
+  const { writeAsync: removeLiquidityWrite } = useScaffoldContractWrite("Exchange", "removeLiquidity", [
+    NUMBER_REGEX.test(tokenValue5) ? ethers.utils.parseEther(tokenValue5) : undefined,
+  ]);
+
   const { writeAsync: approveTokenWrite } = useScaffoldContractWrite("DAI", "approve", [
     deployedContractData?.address,
     NUMBER_REGEX.test(tokenValue4) ? ethers.utils.parseEther(tokenValue4) : undefined,
+  ]);
+  const { writeAsync: approveTokenWriteTokenEth } = useScaffoldContractWrite("DAI", "approve", [
+    deployedContractData?.address,
+    NUMBER_REGEX.test(tokenValue1) ? ethers.utils.parseEther(tokenValue1) : undefined,
   ]);
 
   const { data: daiBalance } = useScaffoldContractRead<BigNumber>("DAI", "balanceOf", [address], { watch: true });
@@ -105,7 +120,12 @@ const Swap = ({ contractName = "Exchange" }) => {
   };
 
   const handleSwap = async () => {
-    await swapWrite();
+    if (tokenName1 === "ETH") {
+      await swapEthWrite();
+    } else {
+      await approveTokenWriteTokenEth();
+      await swapTokenWrite();
+    }
     setRefreshDisplayVariables(prev => !prev);
   };
 
@@ -310,8 +330,24 @@ const Swap = ({ contractName = "Exchange" }) => {
                   <h3 className="font-medium text-lg mb-0 break-all">LP Token Balance</h3>
                 </div>
                 {lpTokenBalance ? (
-                  <div className="text-gray-500 font-medium flex flex-col items-start">
-                    {ethers.utils.formatEther(lpTokenBalance)}
+                  <div className="space-y-4">
+                    <div className="text-gray-500 font-medium flex flex-col items-start">
+                      {ethers.utils.formatEther(lpTokenBalance)}
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="0.0"
+                      className="input w-full max-w-xs rounded-full -ml-2 py-1 h-6"
+                      onChange={e => setTokenValue5(e.target.value)}
+                    />
+                    <button
+                      className="btn btn-secondary btn-sm"
+                      onClick={async () => {
+                        await removeLiquidityWrite();
+                      }}
+                    >
+                      withdraw token
+                    </button>
                   </div>
                 ) : (
                   <div className="text-gray-500 font-medium flex flex-col items-start">Loading...</div>
