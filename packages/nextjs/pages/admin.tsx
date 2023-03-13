@@ -59,6 +59,7 @@ const Admin: NextPage = () => {
   useEffect(() => {
     const getUsers = async () => {
       try {
+        setLoading(true);
         if (user?.isAdmin !== true) {
           router.push("/");
         }
@@ -71,7 +72,9 @@ const Admin: NextPage = () => {
         const filteredUsers = filteredData.filter(user => user?.kycCompleted === false);
         console.log("filteredUsers ", filteredUsers);
         setUsers([...filteredUsers]);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.log(error);
       }
     };
@@ -80,6 +83,7 @@ const Admin: NextPage = () => {
   // console.log("users ", users);
 
   const acceptHandler = async id => {
+    setLoading(true);
     const userDoc = doc(db, "users", id);
     await updateDoc(userDoc, {
       kycCompleted: true,
@@ -92,9 +96,11 @@ const Admin: NextPage = () => {
     });
     console.log("KYC completed");
     toast.success("KYC completed");
+    setLoading(false);
   };
 
   const rejectHandler = async id => {
+    setLoading(true);
     const userDoc = doc(db, "users", id);
     await deleteDoc(userDoc);
 
@@ -105,6 +111,7 @@ const Admin: NextPage = () => {
     });
     console.log("KYC reject");
     toast.success("KYC reject");
+    setLoading(false);
     console.log("users after rejection ", users);
   };
   return (
@@ -121,7 +128,7 @@ const Admin: NextPage = () => {
           </h1>
 
           <div className="overflow-x-auto md:w-full ">
-            {loading ? (
+            {!loading ? (
               <table className="table border w-fit">
                 {/* head */}
                 <thead>

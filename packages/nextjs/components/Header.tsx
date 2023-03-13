@@ -58,8 +58,7 @@ export default function Header() {
       }
     };
     getAuth();
-  }, [address]);
-
+  }, [address, setUser]);
 
   const navLinks = (
     <>
@@ -100,14 +99,22 @@ export default function Header() {
   return (
     <div className="sticky lg:static top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary">
       <div className="navbar-start w-auto lg:w-1/2">
-        <div className="lg:hidden dropdown" ref={burgerMenuRef}>
+        <div className="lg:hidden cursor-pointer dropdown" ref={burgerMenuRef}>
           <button
-            className={`ml-1 btn btn-ghost ${isDrawerOpen ? "hover:bg-secondary" : "hover:bg-transparent"}`}
+            className={`ml-1 btn btn-ghost cursor-pointer ${
+              isDrawerOpen ? "hover:bg-secondary" : "hover:bg-transparent"
+            }`}
             onClick={() => {
               setIsDrawerOpen(prevIsOpenState => !prevIsOpenState);
             }}
           >
-            <Bars3Icon className="h-1/2" />
+            <Bars3Icon
+              tableValues={0}
+              className="h-1/2"
+              onClick={() => {
+                setIsDrawerOpen(prevIsOpenState => !prevIsOpenState);
+              }}
+            />
           </button>
           {isDrawerOpen && (
             <ul

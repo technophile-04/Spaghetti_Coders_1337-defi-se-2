@@ -18,7 +18,7 @@ import { useAppStore } from "~~/services/store/store";
 import { useEthPrice } from "~~/hooks/scaffold-eth";
 
 import NextNProgress from "nextjs-progressbar";
-import ContextProvider from "../Context/ContextProvider"
+import ContextProvider from "../Context/ContextProvider";
 
 const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
   const price = useEthPrice();
@@ -34,15 +34,15 @@ const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
     <WagmiConfig client={wagmiClient}>
       <NextNProgress />
       <RainbowKitProvider chains={appChains.chains} avatar={BlockieAvatar}>
-      <ContextProvider>
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="relative flex flex-col flex-1">
-            <Component {...pageProps} />
-          </main>
-          <Footer />
-        </div>
-        <Toaster />
+        <ContextProvider>
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="relative flex flex-col flex-1">
+              <Component {...pageProps} />
+            </main>
+            <Footer />
+          </div>
+          <Toaster />
         </ContextProvider>
       </RainbowKitProvider>
     </WagmiConfig>

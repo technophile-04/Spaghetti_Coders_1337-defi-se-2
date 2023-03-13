@@ -3,6 +3,7 @@ dotenv.config();
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-deploy";
+import "hardhat-celo";
 
 // If not set, it uses ours Alchemy's default API key.
 // You can get your own at https://dashboard.alchemyapi.io
@@ -30,6 +31,11 @@ const config: HardhatUserConfig = {
         url: `https://eth-mainnet.alchemyapi.io/v2/${providerApiKey}`,
         enabled: process.env.MAINNET_FORKING_ENABLED === "true",
       },
+    },
+    alfajores: {
+      // can be replaced with the RPC url of your choice.
+      url: "https://alfajores-forno.celo-testnet.org",
+      accounts: [deployerPrivateKey],
     },
     mainnet: {
       url: `https://eth-mainnet.alchemyapi.io/v2/${providerApiKey}`,
@@ -70,7 +76,12 @@ const config: HardhatUserConfig = {
   },
   verify: {
     etherscan: {
-      apiKey: `${etherscanApiKey}`,
+      apiKey: `SJ5VAMJRUTYI4HEGFRMVHI8CHDVFH8Z7BW`,
+    },
+  },
+  etherscan: {
+    apiKey: {
+      alfajores: "MSE2BXYX7NJHMHNRPQ3TRYZANYRNFPFPMC",
     },
   },
 };

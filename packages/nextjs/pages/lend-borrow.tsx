@@ -24,7 +24,7 @@ const LendBorrow: NextPage = () => {
     "Loan",
     "createLoan",
     [2, "0xf9c4431117bFEAb931CBa8cb19d73B08B618181A", 80],
-    "1",
+    "0.05",
   );
   return (
     <>
@@ -99,7 +99,7 @@ const LendBorrow: NextPage = () => {
                       <td className="text-center">
                         <Address address="0xf9c4431117bFEAb931CBa8cb19d73B08B618181A" />
                       </td>
-                      <td className="text-center">1</td>
+                      <td className="text-center">0.05</td>
                       <td className="text-center">{2}%</td>
                       <td>
                         <button onClick={async () => await createLoanWrite()} className="btn">

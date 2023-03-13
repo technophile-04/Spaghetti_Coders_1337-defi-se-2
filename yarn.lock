@@ -1838,6 +1838,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nomicfoundation/hardhat-toolbox@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@nomicfoundation/hardhat-toolbox@npm:1.0.2"
+  peerDependencies:
+    "@ethersproject/abi": ^5.4.7
+    "@ethersproject/providers": ^5.4.7
+    "@nomicfoundation/hardhat-chai-matchers": ^1.0.0
+    "@nomicfoundation/hardhat-network-helpers": ^1.0.0
+    "@nomiclabs/hardhat-ethers": ^2.0.0
+    "@nomiclabs/hardhat-etherscan": ^3.0.0
+    "@typechain/ethers-v5": ^10.1.0
+    "@typechain/hardhat": ^6.1.2
+    "@types/chai": ^4.2.0
+    "@types/mocha": ^9.1.0
+    "@types/node": ">=12.0.0"
+    chai: ^4.2.0
+    ethers: ^5.4.7
+    hardhat: ^2.9.9
+    hardhat-gas-reporter: ^1.0.8
+    solidity-coverage: ^0.7.21
+    ts-node: ">=8.0.0"
+    typechain: ^8.1.0
+    typescript: ">=4.5.0"
+  checksum: d13b3e9f08d8be5f72a25872b6a9d3609fdb34f46b47dbf10963a6fb5003ac1cd0d0c107ef6d91807b864a8766d9e5092518f21db3116902ee5a8ae73fdcaaa2
+  languageName: node
+  linkType: hard
+
 "@nomicfoundation/hardhat-toolbox@npm:^2.0.0":
   version: 2.0.0
   resolution: "@nomicfoundation/hardhat-toolbox@npm:2.0.0"
@@ -2256,6 +2283,7 @@ __metadata:
     eslint-plugin-prettier: ^4.2.1
     ethers: ^5.7.1
     hardhat: ^2.11.2
+    hardhat-celo: ^0.0.3
     hardhat-deploy: ^0.11.15
     hardhat-gas-reporter: ^1.0.9
     prettier: 2.7.1
@@ -2290,6 +2318,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.2.1
     ethers: ^5.0.0
+    firebase: ^9.17.2
     next: ^13.1.6
     nextjs-progressbar: ^0.0.16
     postcss: ^8.4.16
@@ -8458,6 +8487,17 @@ __metadata:
     ajv: ^6.12.3
     har-schema: ^2.0.0
   checksum: b998a7269ca560d7f219eedc53e2c664cd87d487e428ae854a6af4573fc94f182fe9d2e3b92ab968249baec7ebaf9ead69cf975c931dc2ab282ec182ee988280
+  languageName: node
+  linkType: hard
+
+"hardhat-celo@npm:^0.0.3":
+  version: 0.0.3
+  resolution: "hardhat-celo@npm:0.0.3"
+  dependencies:
+    "@nomicfoundation/hardhat-toolbox": ^1.0.2
+  peerDependencies:
+    hardhat: ^2.0.0
+  checksum: 691fb6dc6b349367998512635b47b8b8e346ba3ecd074049681fe3c8e0a239d53c68528c40f6152b20774239f9e0468b40c6a6d71a0053a49a931ee6db3efd46
   languageName: node
   linkType: hard
 
